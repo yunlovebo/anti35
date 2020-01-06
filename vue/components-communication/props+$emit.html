@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue组件间通信</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+    <div id="app">
+        <child :title=" 'hello child' " @child-event="handleChild"></child>
+        <!-- <child :title=" 'hello child' " @child-event="childMessage = $event"></child> -->
+        <p>{{ childMessage }}</p>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['title'],
+            template: `
+                <div>
+                    <h3>{{ title }}</h3>
+                    <button @click="$emit('child-event', 'hello papa')">send something to parent</button>
+                </div>
+            `,
+        })
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    childMessage: 'not yet',
+                }
+            },
+            methods: {
+                handleChild: function (msg) {
+                    this.childMessage = msg;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
