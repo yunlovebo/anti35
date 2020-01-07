@@ -38,5 +38,33 @@
 #### &emsp;&emsp;&emsp;&emsp;实现内容分发；创建通用组件时常用。
 ##### &emsp;&emsp;&emsp;&emsp;
 
-### &emsp; 8. eventBus
-#### &emsp;&emsp;&emsp;&emsp; 事件总线：任意两个组件之间传值；一般bus使用vue对象，也可以自己实现bus。
+### &emsp; 8. eventBus &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/eventBus.html)
+#### &emsp;&emsp;&emsp;&emsp; 事件总线：发布订阅模式；任意两个组件之间传值；一般bus使用vue对象，也可以自己实现bus。
+```
+    // EventBus
+    class EventBus {
+        constructor () {
+            this.callbacks = {};
+        }
+
+        $on (key, cb) {
+            this.callbacks[key] = this.callbacks[key] || [];
+            this.callbacks[key].push(cb);
+        }
+
+        $emit (key, ...args) {
+            if (this.callbacks[key]) {
+                this.callbacks[key].forEach(cb => cb.call(this, ...args))
+            }
+        }
+    }
+    Vue.prototype.$bus = new Bus();
+
+    // broadcast
+    this.$bus.$emit('globalEvent1', this.data1);
+
+    // on
+    this.$bus.$on('globalEvent1', (data) => {
+        this.busData = data;
+    });
+```
