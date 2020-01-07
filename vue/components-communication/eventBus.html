@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+    <div id="app">
+        <child1></child1>
+        <child2></child2>
+    </div>
+    <script type="x-template" id="child1">
+        <div>
+            <h1>子组件1</h1>
+            <p @click="broadcast()">
+                点我派发事件
+            </p>
+        </div>
+    </script>
+    <script type="x-template" id="child2">
+        <div>
+            <h3>子组件2</h3>
+            <p>{{ busData }}</p>
+        </div>
+    </script>
+    <script type="text/babel">
+        // vue本身实现了相关接口，也可以用vue做eventbus
+        class EventBus {
+            constructor () {
+                this.callbacks = {};
+            }
+
+            $on (key, cb) {
+                this.callbacks[key] = this.callbacks[key] || [];
+                this.callbacks[key].push(cb);
+            }
+
+            $emit (key, ...args) {
+                if (this.callbacks[key]) {
+                    this.callbacks[key].forEach(cb => cb.call(this, ...args))
+                }
+            }
+        }
+
+        Vue.prototype.$bus = new EventBus();
+
+        const child1 = {
+            template: '#child1', 
+            data () {
+                return {
+                    data1: 'hello world',
+                }
+            },
+            methods: {
+                broadcast() {
+                    this.$bus.$emit('globalEvent1', this.data1);
+                }
+            },
+        };
+
+        const child2 = {
+            template: '#child2',
+            data() {
+                return {
+                    busData: '####',
+                }
+            },
+            mounted () {
+                this.$bus.$on('globalEvent1', (data) => {
+                    this.busData = data;
+                });
+            },
+        };
+
+        const app = new Vue({
+            el: '#app',
+            data () {
+                return {
+                }
+            },
+            components: {
+                child1,
+                child2,
+            },
+        });
+
+    </script>
+</body>
+</html>
