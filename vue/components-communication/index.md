@@ -1,7 +1,7 @@
 ## 组件间通信方式：
 ##### &emsp;&emsp;
 
-### &emsp; 1. props/$emit &nbsp;&nbsp;[示例]()
+### &emsp; 1. props/$emit &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/props%2B%24emit.html)
 #### &emsp;&emsp;&emsp;&emsp;props: 父->子单向数据流；$emit: 自定义事件。
 ```
     // 子组件：
