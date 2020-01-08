@@ -2,18 +2,30 @@
 ##### &emsp;&emsp;
 
 ### &emsp; 1. props/$emit &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/props%2B%24emit.html)
-#### &emsp;&emsp;&emsp;&emsp;props: 父->子单向数据流；$emit: 自定义事件。
+#### &emsp;&emsp;&emsp;&emsp;· props: 父->子单向数据流；$emit: 自定义事件。
 ```
     // 子组件：
     <button @click="$emit('child-event', 'hello papa')">send something to parent</button>
 
-    //父组件
+    // 父组件
     <child :title=" 'hello child' " @child-event="childMessage = $event"></child>
 ```
+#### &emsp;&emsp;&emsp;&emsp;· 不要双向数据流
+#### &emsp;&emsp;&emsp;&emsp;· 语法糖v-model
 ##### &emsp;&emsp;
 
 ### &emsp; 2. \$parent/\$root/$children
 #### &emsp;&emsp;&emsp;&emsp;\$parent/\$root: 兄弟组件之间委托给父组件/祖先组件通信；\$children: 父组件访问子组件数组。
+```
+    // 子组件访问父组件：
+    this.$parent.babyData = 'gimme some money...xxx' + (new Date().getTime());
+
+    // 子组件访问根组件：
+    this.$root.babyData = 'gimme some money...' + (new Date().getTime());
+
+    // 父组件访问子组件
+    this.$children[0]; // 不能保证子元素顺序
+```
 ##### &emsp;&emsp;
 
 ### &emsp; 3. \$ref
@@ -39,7 +51,7 @@
 ##### &emsp;&emsp;&emsp;&emsp;
 
 ### &emsp; 8. eventBus &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/eventBus.html)
-#### &emsp;&emsp;&emsp;&emsp; 事件总线：发布订阅模式；任意两个组件之间传值；一般bus使用vue对象，也可以自己实现bus。
+#### &emsp;&emsp;&emsp;&emsp; · 事件总线：发布订阅模式；任意两个组件之间传值；一般bus使用vue对象，也可以自己实现bus。
 ```
     // EventBus
     class EventBus {

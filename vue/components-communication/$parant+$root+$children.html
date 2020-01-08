@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue组件间通信</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 @click="giveU">root</h1>
+        <h4>小baby她说：{{ babyData }}</h4>
+        <hr />
+        <grand>
+        </grand>
+    </div>
+
+    <script type="text/template" id="grand">
+        <div>
+            <h1>祖父</h1>
+            <p>baby 她说：{{ babyData }}</p>
+            <hr />
+            <parent></parent>
+        </div>
+    </script>
+
+    <script type="text/template" id="parent">
+        <div>
+            <h2 @click="giveU">papa</h2>
+            <p>baby 她说：{{ babyData }}</p>
+            <hr />
+            <child></child>
+        </div>
+    </script>
+
+    <script type="text/template" id="child">
+        <div>
+            <h3 @click="babySay">baby 她说。。。点击获取</h3>
+            <p>papa说：{{ papaData }}</p>
+            <p>grand说：{{ grandData }}</p>
+        </div>
+    </script>
+
+    <script type="text/babel">
+       Vue.component('grand', {
+            data () {
+                return {
+                    babyData: '###',
+                }
+            },
+            template: '#grand',
+        });
+        Vue.component('parent', {
+            data () {
+                return {
+                    babyData: '###',
+                }
+            },
+            methods: {
+                giveU() {
+                    this.$children[0].papaData = 'money from papa got!';
+                }
+            },
+            template: '#parent',
+        });
+        Vue.component('child', {
+            data () {
+                return {
+                    papaData: '###',
+                    grandData: '###',
+                }
+            },
+            methods: {
+                babySay() {
+                    this.$root.babyData = 'gimme some money...' + (new Date().getTime());
+                    this.$parent.babyData = 'gimme some money...xxx' + (new Date().getTime());
+                    // this.$parent.$parent.babyData = 'gimme some money...xxx' + (new Date().getTime());
+                }
+            },
+            template: '#child',
+        });
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    babyData: '###',
+                }
+            },
+            methods: {
+                giveU() {
+                    console.log(this.$children);
+                }
+            },
+        });
+    </script>
+</body>
+</html>
