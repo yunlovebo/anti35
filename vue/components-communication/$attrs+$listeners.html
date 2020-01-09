@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <style>
+        .wrap {
+            border: 1px solid #ccc;
+            display: flex;
+            flex-direction: row;
+            width: 300px;
+        }
+        .wrap>label {
+            margin: 0;
+            padding: 0;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .wrap>input {
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+            height: 30px;
+            line-height: 30px;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-input 
+            :title="inputData.title" 
+            :type="inputData.type" 
+            :prop1="props[0]" 
+            :prop2="props[1]" 
+            placeholder="请输入" 
+            v-on:blur="parentBlur"
+        >
+        </my-input>
+    </div>
+
+    <script type="text/template" id="my-input">
+        <div class="root">
+            <div class="wrap">
+                <label v-bind="$attrs">{{ title }}</label>
+                <input :type="type" @input="textInput" :value="textValue" v-bind="$attrs" v-on="$listeners" />
+            </div>
+            <p>输入的内容：{{ textValue }}</p>
+        </div>
+    </script>
+
+    <script type="text/babel">
+        const myInput = {
+            template: '#my-input',
+            inheritAttrs: false, // 设置false时未被props收集的$attrs不会被添加到.root上
+            data() {
+                return {
+                    textValue: ''
+                }
+            },
+            props: {
+                title: {
+                    type: 'String',
+                    default: '###',
+                },
+                type: {
+                    type: 'String',
+                    required: true,
+                }
+            },
+            methods: {
+                textInput(e) {
+                    console.log(e.target)
+                    this.textValue = e.target.value;
+                }
+            },
+            mounted () {
+                console.log(this.$attrs);
+                console.log(this.$listeners);
+            },
+        };
+
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    inputData: {
+                        title: 'abc',
+                        type: 'number',
+                    },
+                    props: [
+                        'props1',
+                        'props2',
+                    ]
+                }
+            },
+            methods: {
+                parentBlur() {
+                    this.inputData.title = 'outof';
+                }
+            },
+            components: {
+                myInput,
+            },
+        });
+    </script>
+</body>
+</html>
