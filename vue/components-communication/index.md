@@ -36,7 +36,7 @@
 #### &emsp;&emsp;&emsp;&emsp; 祖先组件跨代传给后代组件，提示：provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的。
 ##### &emsp;&emsp;
 
-### &emsp; 5. \$attrs/\$listeners &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/props%2B%24emit.html)
+### &emsp; 5. \$attrs/\$listeners &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/%24attrs%2B%24listeners.html)
 #### &emsp;&emsp;&emsp;&emsp;创建高阶组件时常用；
 #### &emsp;&emsp;&emsp;&emsp;\$attrs：包含了父作用域中不作为 prop 被识别 (且获取) 的特性绑定 (class 和 style 除外)，(vue的api真多啊～)；
 #### &emsp;&emsp;&emsp;&emsp;\$listeners：包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器，在创建更高层次的组件时非常有用。
