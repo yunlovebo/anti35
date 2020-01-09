@@ -14,7 +14,7 @@
 #### &emsp;&emsp;&emsp;&emsp;· 语法糖v-model
 ##### &emsp;&emsp;
 
-### &emsp; 2. \$parent/\$root/$children
+### &emsp; 2. \$parent/\$root/$children &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/%24parant%2B%24root%2B%24children.html)
 #### &emsp;&emsp;&emsp;&emsp;\$parent/\$root: 兄弟组件之间委托给父组件/祖先组件通信；\$children: 父组件访问子组件数组。
 ```
     // 子组件访问父组件：
