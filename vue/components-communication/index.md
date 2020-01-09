@@ -44,7 +44,7 @@
 ```
 ##### &emsp;&emsp;
 
-### &emsp; 4. provide/inject
+### &emsp; 4. provide/inject &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/provide%2Binject.html)
 #### &emsp;&emsp;&emsp;&emsp; · 祖先组件跨代传给后代组件，提示：provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的。
 #### &emsp;&emsp;&emsp;&emsp; · 主要在开发高阶插件/组件库时使用。并不推荐用于普通应用程序代码中。
 #### &emsp;&emsp;&emsp;&emsp; · 与React的上下文特性很相似
