@@ -48,6 +48,22 @@
 #### &emsp;&emsp;&emsp;&emsp; · 祖先组件跨代传给后代组件，提示：provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的。
 #### &emsp;&emsp;&emsp;&emsp; · 主要在开发高阶插件/组件库时使用。并不推荐用于普通应用程序代码中。
 #### &emsp;&emsp;&emsp;&emsp; · 与React的上下文特性很相似
+```
+    // 父组件：
+    provide () {
+        return {
+            foo: 'hello child!'
+        }
+    },
+    // 或
+    provide: {
+        foo: 'hello child1!'
+    },
+
+    // 子组件：
+    inject: ['foo'],
+    // 更多写法查看文档
+```
 ##### &emsp;&emsp;
 
 ### &emsp; 5. \$attrs/\$listeners &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/%24attrs%2B%24listeners.html)

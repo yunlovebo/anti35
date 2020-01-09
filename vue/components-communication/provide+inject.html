@@ -29,10 +29,13 @@
         }
 
         const app = new Vue({
-            provide () {
-                return {
-                    foo: 'hello child!'
-                }
+            // provide () {
+            //     return {
+            //         foo: 'hello child!'
+            //     }
+            // },
+            provide: {
+                foo: 'hello child1!'
             },
             el: '#app',
             components: {
