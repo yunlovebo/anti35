@@ -74,8 +74,24 @@
 #### &emsp;&emsp;&emsp;&emsp;全局store，编写通用组件时可能无法强制使用者安装vuex。
 ##### &emsp;&emsp;
 
-### &emsp; 7. slot
-#### &emsp;&emsp;&emsp;&emsp;实现内容分发；创建通用组件时常用。
+### &emsp; 7. slot &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/slot.html)
+#### &emsp;&emsp;&emsp;&emsp;实现内容分发；创建通用组件时常用，分文匿名插槽、具名插槽、作用域插槽(在父级的插槽内容中可用子元素的数据)、动态插槽。
+#### &emsp;&emsp;&emsp;&emsp;作用域插槽的内部工作原理是将你的插槽内容包括在一个传入单个参数的函数里，所以可以使用 ES2015 解构来传入具体的插槽 prop：
+```
+    function (slotProps) {
+    // 插槽内容
+    }
+
+    <current-user v-slot="{ user }">
+        {{ user.firstName }}
+    </current-user>
+
+    <current-user v-slot="{ user: person }">
+        {{ person.firstName }}
+    </current-user>
+```
+
+#### &emsp;&emsp;&emsp;&emsp;推荐始终不用插槽缩写形式，避免混淆。
 ##### &emsp;&emsp;&emsp;&emsp;
 
 ### &emsp; 8. eventBus &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/eventBus.html)

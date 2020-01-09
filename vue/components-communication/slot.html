@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+    <div id="app">
+        <child>
+            <template v-slot:a>
+                <h1>a slot</h1>
+            </template>
+            <template v-slot:b="slopProps">
+                <!-- 在父级的插槽内容中可用子元素的数据 -->
+                <h2>firstName: {{ slopProps.user.firstName }}</h2>
+            </template>
+        </child>
+    </div>
+
+    <script type="text/template" id="child">
+        <div class="root">
+            <slot name="a"></slot>
+            <slot name="b" v-bind:user="b">
+                <p>lastName: {{ b.lastName }}</p>
+            </slot>
+            <slot name="c"><h3>### c ###</h3></slot>
+        </div>
+    </script>
+
+    <script type="text/babel">
+        const child = {
+            template: '#child',
+            data() {
+                return {
+                    inner: 'inner data',
+                    b: {
+                        lastName: 'world',
+                        firstName: 'hello',
+                    },
+                }
+            },
+        }
+
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    a: 'hi !~ ',
+                }
+            },
+            components: {
+                child,
+            },
+        });
+    </script>
+</body>
+</html>
