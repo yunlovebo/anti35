@@ -29,7 +29,18 @@
 ##### &emsp;&emsp;
 
 ### &emsp; 3. \$ref
-#### &emsp;&emsp;&emsp;&emsp;父组件获取子组件实例
+#### &emsp;&emsp;&emsp;&emsp;父组件获取子组件实例，只会在组件渲染完成之后生效，并且它们不是响应式的。这仅作为一个用于直接操作子组件的“逃生舱”——你应该避免在模板或计算属性中访问 $refs。
+```
+    // 父组件
+    <input ref="input">
+    methods: {
+        // 用来从父级组件聚焦输入框
+        focus: function () {
+            this.$refs.input.focus()
+        }
+    }
+    
+```
 ##### &emsp;&emsp;
 
 ### &emsp; 4. provide/inject
