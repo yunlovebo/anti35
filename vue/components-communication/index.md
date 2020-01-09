@@ -1,4 +1,5 @@
 ## 组件间通信方式：
+### [注：]为了方便查看，代码示例里的html文件可以直接在浏览器里运行，不需要编译。
 ##### &emsp;&emsp;
 
 ### &emsp; 1. props/$emit &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/props%2B%24emit.html)
@@ -28,7 +29,7 @@
 ```
 ##### &emsp;&emsp;
 
-### &emsp; 3. \$ref
+### &emsp; 3. \$ref &nbsp;&nbsp;[代码示例](https://github.com/yunlovebo/anti35/blob/master/vue/components-communication/%24refs.html)
 #### &emsp;&emsp;&emsp;&emsp;父组件获取子组件实例，只会在组件渲染完成之后生效，并且它们不是响应式的。这仅作为一个用于直接操作子组件的“逃生舱”——你应该避免在模板或计算属性中访问 $refs。
 ```
     // 父组件
