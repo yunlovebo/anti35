@@ -12,8 +12,8 @@
             let sum = 0, posible = 0;
             for (let i = 0; i < 1000000; i++) {
                 sum ++;
-                let a = Math.ceil(Math.random() * length);
-                let b = Math.ceil(Math.random() * length);
+                let a = Math.random() * length;
+                let b = Math.random() * length;
                 let c = length - a - b;
                 if (a + b > c && a + c > b && b + c > a && Math.abs(a - b) < c && Math.abs(a - c) < b && Math.abs(b - c) < a) {
                     posible++;

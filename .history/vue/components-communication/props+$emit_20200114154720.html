@@ -24,8 +24,8 @@
                 </div>
             `,
             methods: {
-                handleChild: function (msg) { // 谁#emit，谁$on
-                    this.$parent.handleChild(msg);
+                handleChild: function (msg) {
+                    this.$parent.childMessage = msg;
                 }
             },
             mounted () {
@@ -39,11 +39,11 @@
                     childMessage: 'not yet',
                 }
             },
-            methods: {
-                handleChild: function (msg) {
-                    this.childMessage = msg;
-                }
-            },
+            // methods: {
+            //     handleChild: function (msg) {
+            //         this.childMessage = msg;
+            //     }
+            // },
             // mounted () {
             //     this.$on('child-event', this.handleChild);
             // }

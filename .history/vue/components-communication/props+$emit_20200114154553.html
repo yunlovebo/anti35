@@ -23,14 +23,6 @@
                     <button @click="$emit('child-event', 'hello papa')">send something to parent</button>
                 </div>
             `,
-            methods: {
-                handleChild: function (msg) { // 谁#emit，谁$on
-                    this.$parent.handleChild(msg);
-                }
-            },
-            mounted () {
-                this.$on('child-event', this.handleChild);
-            },
         })
         var app = new Vue({
             el: '#app',
@@ -44,9 +36,9 @@
                     this.childMessage = msg;
                 }
             },
-            // mounted () {
-            //     this.$on('child-event', this.handleChild);
-            // }
+            mounted () {
+                this.$on('child-event', this.handleChild);
+            }
         })
     </script>
 </body>

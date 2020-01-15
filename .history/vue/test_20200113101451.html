@@ -23,14 +23,22 @@
             return posible / sum;
         }
 
-        let results = [], sum = 0;
-        for (let i = 0; i < 100; i++) {
+        let results = [];
+        for (let i = 0; i < 1000000; i++) {
             results.push(randomTriangle());
         }
 
-        let final = results.reduce((a, b) => a + b, 0) / results.length;
+        results.reduce(() => {
 
-        console.log(final);
+        })
+
+        console.log(randomTriangle());
+        console.log(randomTriangle());
+        console.log(randomTriangle());
+        console.log(randomTriangle());
+        console.log(randomTriangle());
+        console.log(randomTriangle());
+        console.log(randomTriangle());
     </script>
 </head>
 <body>

@@ -24,7 +24,7 @@
                 </div>
             `,
             methods: {
-                handleChild: function (msg) { // 谁#emit，谁$on
+                handleChild: function (msg) {
                     this.$parent.handleChild(msg);
                 }
             },

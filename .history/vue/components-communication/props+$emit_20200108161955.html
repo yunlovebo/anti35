@@ -9,9 +9,8 @@
 </head>
 <body>
     <div id="app">
-        <!-- <child :title=" 'hello child' " @child-event="handleChild"></child> -->
+        <child :title=" 'hello child' " @child-event="handleChild"></child>
         <!-- <child :title=" 'hello child' " @child-event="childMessage = $event"></child> -->
-        <child :title=" 'hello child' "></child>
         <p>{{ childMessage }}</p>
     </div>
     <script>
@@ -23,14 +22,6 @@
                     <button @click="$emit('child-event', 'hello papa')">send something to parent</button>
                 </div>
             `,
-            methods: {
-                handleChild: function (msg) { // 谁#emit，谁$on
-                    this.$parent.handleChild(msg);
-                }
-            },
-            mounted () {
-                this.$on('child-event', this.handleChild);
-            },
         })
         var app = new Vue({
             el: '#app',
@@ -43,10 +34,7 @@
                 handleChild: function (msg) {
                     this.childMessage = msg;
                 }
-            },
-            // mounted () {
-            //     this.$on('child-event', this.handleChild);
-            // }
+            }
         })
     </script>
 </body>

@@ -8,29 +8,21 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script>
-        function randomTriangle (length = 100) {
+        function randomTriangle (length) {
+            if (length < 0) return 0;
+
+            let a = Math.random() * length;
+            let b = Math.random() * length;
+            let c = length - a - b;
+
             let sum = 0, posible = 0;
-            for (let i = 0; i < 1000000; i++) {
+            for (let i = 0; i < 1000000; i ++) {
                 sum ++;
-                let a = Math.ceil(Math.random() * length);
-                let b = Math.ceil(Math.random() * length);
-                let c = length - a - b;
-                if (a + b > c && a + c > b && b + c > a && Math.abs(a - b) < c && Math.abs(a - c) < b && Math.abs(b - c) < a) {
+                if (a + b > c && a + c > b && b + c > a) {
                     posible++;
                 }
             }
-
-            return posible / sum;
         }
-
-        let results = [], sum = 0;
-        for (let i = 0; i < 100; i++) {
-            results.push(randomTriangle());
-        }
-
-        let final = results.reduce((a, b) => a + b, 0) / results.length;
-
-        console.log(final);
     </script>
 </head>
 <body>

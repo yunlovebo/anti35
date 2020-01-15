@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>render</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+</head>
+<body>
+    <div id="app">
+        <anchored-heading level="1">abc</anchored-heading>
+        <anchored-heading level="2"><span>bcd</span></anchored-heading>
+
+
+        <child>
+            <template v-slot:default="sprops">
+                {{ sprops.user.name }}
+            </template>
+        </child>
+    </div>
+
+    <script>
+        Vue.component('anchored-heading', {
+            render (h) {
+                console.log(this);
+                return h(
+                    'h' + this.$props.level,
+                    this.$slots.default,
+                );
+            },
+            props: {
+                level: {
+                    type: Number,
+                    required: true,
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app'
+        });
+
+
+        var getChildrenTextContent = function (children) {
+            return children.map((node) => {
+                return node.children 
+                    ? getChildrenTextContent(node.getChildrenTextContent)
+                    : node.text
+            }).join('')
+        }
+
+        Vue.component('anchored-heading', {
+            render (h) {
+                var headingId = getChildrenTextContent(this.$slots.default)
+                .toLowerCase()
+
+            }
+        })
+    </script>
+</body>
+</html>

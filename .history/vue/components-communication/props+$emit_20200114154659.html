@@ -24,8 +24,8 @@
                 </div>
             `,
             methods: {
-                handleChild: function (msg) { // 谁#emit，谁$on
-                    this.$parent.handleChild(msg);
+                handleChild: function (msg) {
+                    this.$parent.childMessage = msg;
                 }
             },
             mounted () {
