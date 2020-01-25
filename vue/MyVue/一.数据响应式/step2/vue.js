@@ -1,5 +1,7 @@
 (function (w) {
     w.defineReactive = function defineReactive(obj, key, val) {
+
+        // 对象嵌套    
         observer(obj[key]);
 
         Object.defineProperty(obj, key, {
@@ -10,7 +12,7 @@
             set (newVal) {
                 if (val !== newVal) {
                     val = newVal;
-                    // 2.2 初始化响应式数据时，某个key的值是object类型，需要递归做响应式处理
+                    // 赋值是对象
                     if (typeof val === 'object') {
                         observer(obj[key])
                     }
@@ -21,7 +23,7 @@
         })
     }
 
-    // 2.3 为对象新增一个属性，该属性也要做响应式处理
+    // 新增属性
     w.$set = function (obj, key, val) {
         defineReactive(obj, key, val)
     }
@@ -31,7 +33,7 @@
     }
 
     w.observer = function observer (obj) {
-        if (typeof obj !== 'object') {
+        if (obj !== null && typeof obj !== 'object') {
             return;
         }
         Object.keys(obj).forEach((key) => {
